@@ -1436,26 +1436,24 @@ void NativeWindowMac::SetVibrancy(const std::string& type) {
     vibrancyType = NSVisualEffectMaterialUltraDark;
   }
 
-  if (@available(macOS 10.14, *)) {
-    if (type == "header") {
-      vibrancyType = NSVisualEffectMaterialHeaderView;
-    } else if (type == "sheet") {
-      vibrancyType = NSVisualEffectMaterialSheet;
-    } else if (type == "window") {
-      vibrancyType = NSVisualEffectMaterialWindowBackground;
-    } else if (type == "hud") {
-      vibrancyType = NSVisualEffectMaterialHUDWindow;
-    } else if (type == "fullscreen-ui") {
-      vibrancyType = NSVisualEffectMaterialFullScreenUI;
-    } else if (type == "tooltip") {
-      vibrancyType = NSVisualEffectMaterialToolTip;
-    } else if (type == "content") {
-      vibrancyType = NSVisualEffectMaterialContentBackground;
-    } else if (type == "under-window") {
-      vibrancyType = NSVisualEffectMaterialUnderWindowBackground;
-    } else if (type == "under-page") {
-      vibrancyType = NSVisualEffectMaterialUnderPageBackground;
-    }
+  if (type == "header") {
+    vibrancyType = NSVisualEffectMaterialHeaderView;
+  } else if (type == "sheet") {
+    vibrancyType = NSVisualEffectMaterialSheet;
+  } else if (type == "window") {
+    vibrancyType = NSVisualEffectMaterialWindowBackground;
+  } else if (type == "hud") {
+    vibrancyType = NSVisualEffectMaterialHUDWindow;
+  } else if (type == "fullscreen-ui") {
+    vibrancyType = NSVisualEffectMaterialFullScreenUI;
+  } else if (type == "tooltip") {
+    vibrancyType = NSVisualEffectMaterialToolTip;
+  } else if (type == "content") {
+    vibrancyType = NSVisualEffectMaterialContentBackground;
+  } else if (type == "under-window") {
+    vibrancyType = NSVisualEffectMaterialUnderWindowBackground;
+  } else if (type == "under-page") {
+    vibrancyType = NSVisualEffectMaterialUnderPageBackground;
   }
 
   if (vibrancyType) {

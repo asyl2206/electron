@@ -123,16 +123,13 @@
   // Change font type, if specified
   CGFloat existing_size = [[[statusItem_ button] font] pointSize];
   if ([font_type isEqualToString:@"monospaced"]) {
-    if (@available(macOS 10.15, *)) {
-      NSDictionary* attributes = @{
-        NSFontAttributeName :
-            [NSFont monospacedSystemFontOfSize:existing_size
-                                        weight:NSFontWeightRegular]
-      };
-      [attributed_title
-          addAttributes:attributes
-                  range:NSMakeRange(0, [attributed_title length])];
-    }
+    NSDictionary* attributes = @{
+      NSFontAttributeName :
+          [NSFont monospacedSystemFontOfSize:existing_size
+                                      weight:NSFontWeightRegular]
+    };
+    [attributed_title addAttributes:attributes
+                              range:NSMakeRange(0, [attributed_title length])];
   } else if ([font_type isEqualToString:@"monospacedDigit"]) {
     NSDictionary* attributes = @{
       NSFontAttributeName :

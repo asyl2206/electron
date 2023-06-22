@@ -166,14 +166,11 @@
         skProductSubscriptionPeriodToStruct:productDiscount.subscriptionPeriod];
   }
 
-  if (@available(macOS 10.14.4, *)) {
-    productDiscountStruct.type = (int)productDiscount.type;
-    if (productDiscount.identifier != nil) {
-      productDiscountStruct.identifier =
-          [productDiscount.identifier UTF8String];
-    }
-    productDiscountStruct.price = [productDiscount.price doubleValue];
+  productDiscountStruct.type = (int)productDiscount.type;
+  if (productDiscount.identifier != nil) {
+    productDiscountStruct.identifier = [productDiscount.identifier UTF8String];
   }
+  productDiscountStruct.price = [productDiscount.price doubleValue];
 
   return productDiscountStruct;
 }
@@ -226,62 +223,40 @@
       }
     }
   }
-  if (@available(macOS 10.13.2, *)) {
-    if (product.introductoryPrice != nil) {
-      productStruct.introductoryPrice =
-          [self skProductDiscountToStruct:product.introductoryPrice];
-    }
-    if (product.subscriptionPeriod != nil) {
-      productStruct.subscriptionPeriod =
-          [self skProductSubscriptionPeriodToStruct:product.subscriptionPeriod];
-    }
+  if (product.introductoryPrice != nil) {
+    productStruct.introductoryPrice =
+        [self skProductDiscountToStruct:product.introductoryPrice];
   }
-  if (@available(macOS 10.14, *)) {
-    if (product.subscriptionGroupIdentifier != nil) {
-      productStruct.subscriptionGroupIdentifier =
-          [product.subscriptionGroupIdentifier UTF8String];
-    }
+  if (product.subscriptionPeriod != nil) {
+    productStruct.subscriptionPeriod =
+        [self skProductSubscriptionPeriodToStruct:product.subscriptionPeriod];
   }
-  if (@available(macOS 10.14.4, *)) {
-    if (product.discounts != nil) {
-      productStruct.discounts.reserve([product.discounts count]);
+  if (product.subscriptionGroupIdentifier != nil) {
+    productStruct.subscriptionGroupIdentifier =
+        [product.subscriptionGroupIdentifier UTF8String];
+  }
+  if (product.discounts != nil) {
+    productStruct.discounts.reserve([product.discounts count]);
 
-      for (SKProductDiscount* discount in product.discounts) {
-        productStruct.discounts.push_back(
-            [self skProductDiscountToStruct:discount]);
-      }
+    for (SKProductDiscount* discount in product.discounts) {
+      productStruct.discounts.push_back(
+          [self skProductDiscountToStruct:discount]);
     }
   }
 
   // Downloadable Content Information
   productStruct.isDownloadable = [product downloadable];
-  if (@available(macOS 10.14, *)) {
-    if (product.downloadContentVersion != nil) {
-      productStruct.downloadContentVersion =
-          [product.downloadContentVersion UTF8String];
-    }
-    if (product.downloadContentLengths != nil) {
-      productStruct.downloadContentLengths.reserve(
-          [product.downloadContentLengths count]);
+  if (product.downloadContentVersion != nil) {
+    productStruct.downloadContentVersion =
+        [product.downloadContentVersion UTF8String];
+  }
+  if (product.downloadContentLengths != nil) {
+    productStruct.downloadContentLengths.reserve(
+        [product.downloadContentLengths count]);
 
-      for (NSNumber* contentLength in product.downloadContentLengths) {
-        productStruct.downloadContentLengths.push_back(
-            [contentLength longLongValue]);
-      }
-    }
-  } else {
-    if (product.contentVersion != nil) {
-      productStruct.downloadContentVersion =
-          [product.contentVersion UTF8String];
-    }
-    if (product.contentLengths != nil) {
-      productStruct.downloadContentLengths.reserve(
-          [product.contentLengths count]);
-
-      for (NSNumber* contentLength in product.contentLengths) {
-        productStruct.downloadContentLengths.push_back(
-            [contentLength longLongValue]);
-      }
+    for (NSNumber* contentLength in product.downloadContentLengths) {
+      productStruct.downloadContentLengths.push_back(
+          [contentLength longLongValue]);
     }
   }
 
